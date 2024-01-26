@@ -1,0 +1,121 @@
+{ 
+    /// <summary>
+    /// Не статический класс Point
+    /// </summary>
+    class Point
+    {
+        //Задание1-Дан Класс Point который определяет точку на координатной плоскости.
+        //Реализуем подсчёт колличества созданых экземляров типа Point.
+        //Класс Point объявляем не статическим
+
+        /// <summary>
+        /// Приватное поле x;
+        /// </summary>
+        private double x;
+        /// <summary>
+        /// Приватное поле y;
+        /// </summary>
+        private double y;
+        /// <summary>
+        /// Статическое поле count;
+        /// </summary>
+        public static int count;
+        
+        /// <summary>
+        /// Конструктор с двумя параметрами;
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        public Point(double x, double y)
+        {
+            this.x = x;
+            this.y = y;
+            Point.count++;
+        }
+
+        /// <summary>
+        /// Конструктор без параметров в котором x и y присвоены значения 1.0;
+        /// </summary>
+        public Point()
+        {
+            x = y = 1.0;
+            count++;
+        }
+
+        /// <summary>
+        /// Статический конструктор со значением 0;
+        /// </summary>
+        static Point()
+        {
+            count = 0;
+        }
+
+        /// <summary>
+        /// Методы доступа
+        /// </summary>
+        /// <returns></returns>
+        public double GetX()
+        {
+            return x;
+        }
+
+        public double GetY()
+        {
+            return y;
+        }
+
+        public void SetX(double x)
+        {
+            { this.x = x; }
+        }
+
+        public void SetY(double y)
+        {
+            { this.y = y; }
+        }
+
+        /// <summary>
+        /// Метод для вывода значений по x и y;
+        /// </summary>
+        public void Print()
+        {
+            Console.WriteLine("x={0}, y = {1}", x, y);
+        }
+
+        //Задание2-Модифицировать Класс Point
+
+        /// <summary>
+        ///Для второго задания, усовершенствования кода, добавим метод LengthPoints
+        /// </summary>
+        /// <param name="A"></param>
+        /// <param name="B"></param>
+        /// <returns></returns>
+        public static double LengthPoints(Point A, Point B)
+        {
+            double вычисление;
+            вычисление = Math.Sqrt((A.x - B.x) * (A.x - B.x) + (A.y - B.y) * (A.y - B.y));
+            return вычисление;
+        }
+
+class Program
+    {
+        static void Main(string[] args)
+        {
+            Point point = new Point();
+            Point point1 = new Point(2, 3.0);
+            Console.WriteLine("Первые значения: ");
+            point.Print();
+            Console.WriteLine("Вторые значения: ");
+            point1.Print();
+            Console.WriteLine($"Статическое поле = { Point.count}");
+            Point[] points = new Point[5];
+            Console.WriteLine($"Статическое поле = {Point.count}");
+            for(int i = 0; i<points.Length; i++)
+            {
+                points[i] = new Point(i, i * i);
+            }
+            Console.WriteLine($"Статическое поле = {Point.count}");
+            //Дополнение ко второй задаче;
+            Console.WriteLine("Расстояние между двумя точками x и y = {0:f3}",Point.LengthPoints(point, point1));
+            Console.ReadKey();
+        }
